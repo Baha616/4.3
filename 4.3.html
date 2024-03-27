@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Цена Валют</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Цена валют</h1>
+    <button id="addButton">Посмотреть</button>
+    <div id="gamesList">
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let games = [
+        { title: 'Доллар США', platform: '92.5745' },
+        { title: 'Евро', platform: '	100.4121' },
+        { title: 'Австралийский доллар', platform: '60.5345' },
+        { title: 'Азербайджанский манат', platform: '54.4556' },
+        { title: 'Армянский драм', platform: '23.3963' },
+        { title: 'Бат', platform: '25.4611' },
+        { title: 'Белорусский рубль', platform: '28.4626' },
+        { title: 'Болгарский лев', platform: '51.2850' },
+        { title: 'Бразильский реал', platform: '18.5647' },
+        { title: 'Венгерский форинт', platform: '25.3462' }
+      ];
+
+      let addButton = document.getElementById('addButton');
+      let gamesList = document.getElementById('gamesList');
+
+      addButton.addEventListener('click', function() {
+        let template = document.getElementById('gameTemplate').innerHTML;
+        let rendered = Mustache.render(template, { games: games });
+        gamesList.innerHTML = rendered;
+      });
+    });
+  </script>
+
+  <script id="gameTemplate" type="x-tmpl-mustache">
+    {{#games}}
+    <div class="game">
+      <h2>{{title}}</h2>
+      <p>Цена: {{platform}}</p>
+    </div>
+    {{/games}}
+  </script>
+</body>
+</html>
